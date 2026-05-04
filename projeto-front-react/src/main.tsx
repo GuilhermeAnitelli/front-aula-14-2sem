@@ -6,6 +6,7 @@ import Users from "./routes/Users/index.tsx";
 import Error from "./routes/Error/index.tsx";
 import Alunos from "./routes/Alunos/index.tsx";
 import { createBrowserRouter,RouterProvider } from "react-router-dom";
+import "./globals.css";
 
 const router = createBrowserRouter([
   {

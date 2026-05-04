@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+
+.tableAluno{
+    @apply w-[90%] mx-auto my-auto bg-[#292d2c] text-white border-2 border-collapse;
+
+    & th,td{
+        @apply border-2 text-center;
+    }
+}
