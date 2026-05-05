@@ -1,0 +1,66 @@
+import { useEffect, useState } from "react";
+import type { TipoAluno } from "../../types/tipoAluno";
+
+export default function Alunos() {
+
+  const [alunos, setAlunos] = useState<TipoAluno[]>([]);
+
+  useEffect(() => {
+
+    const callList = async ()=>{
+      try {
+        const response = await fetch("http://localhost:3000/alunos");
+        
+        if(response.ok){
+          const data:TipoAluno[] = await response.json();
+          setAlunos(data);
+        }else{
+          throw new Error("Listagem incompleta!");
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    callList();
+    
+  }, []);
+  
+  return (
+    <main>
+        <h1>Lista de Alunos</h1>
+        <table className="tableAluno">
+          
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>RM</th>
+              <th>ALUNO</th>
+              <th>NOTA</th>
+              <th>EDITAR/EXCLUIR</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {alunos.map((a)=>(
+              <tr key={a.id}>
+                <td>{a.id}</td>
+                <td>{a.rm}</td>
+                <td>{a.aluno}</td>
+                <td>{a.nota}</td>
+                <td>Editar / Excluir</td>
+              </tr>
+            ))}
+          </tbody>
+          
+          <tfoot>
+            <tr>
+              <td colSpan={5}>Quantidade de Alunos : {alunos.length}</td>
+            </tr>
+          </tfoot>
+
+        </table>
+    </main>
+  )
+}
